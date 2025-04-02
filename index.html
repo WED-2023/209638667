@@ -31,6 +31,18 @@
 
   </div>
 
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>STEVEN TYLER</h1>
+        <p>The Demon of Screamin'</p>
+      </div>
+      <div class="hero-image">
+        <img src="images/hero_side.jpg" alt="Steven Tyler"/>
+      </div>
+    </div>
+  </section>
+
   <section id="about" class="section">
     <h2>About Me</h2>
     <p>
@@ -207,7 +219,7 @@
       <div class="form-group">
         <label for="message">Message</label>
         <div class="textarea-container">
-          <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+          <textarea id="message" name="message" rows="6" placeholder="Write your message here...Please include your favorite Aerosmith song!" required></textarea>
           <button type="button" id="emoji-button">😊</button>
         </div>
       </div>
@@ -248,21 +260,14 @@
     });
   </script>
   <script type="text/javascript">
-    // JavaScript for Q&A
     document.addEventListener('DOMContentLoaded', function () {
-      // Get all question headers
       const questionHeaders = document.querySelectorAll('.question h3');
-
-      // Add click event listener to each question header
       questionHeaders.forEach(header => {
         header.addEventListener('click', function () {
-          // Get the parent question element
           const question = this.parentElement;
 
-          // Toggle the 'active' class on the question
           question.classList.toggle('active');
 
-          // Optional: Close other questions when one is opened
           questionHeaders.forEach(otherHeader => {
             if (otherHeader !== this) {
               otherHeader.parentElement.classList.remove('active');
@@ -271,7 +276,6 @@
         });
       });
     });
-    /* JavaScript solution for emoji picker positioning */
     document.addEventListener('DOMContentLoaded', function () {
       const emojiButton = document.getElementById('emoji-button');
       const emojiPicker = document.getElementById('emoji-picker');
@@ -279,19 +283,14 @@
       const emojis = document.querySelectorAll('.emoji');
       const contactForm = document.getElementById('contact-form');
 
-      // Toggle emoji picker visibility with proper positioning
       emojiButton.addEventListener('click', function (e) {
         e.preventDefault();
 
-        // Get button position
         const buttonRect = emojiButton.getBoundingClientRect();
 
-        // Position picker directly above the button
         emojiPicker.style.position = 'fixed';
         emojiPicker.style.bottom = (window.innerHeight - buttonRect.top + 10) + 'px';
         emojiPicker.style.right = (window.innerWidth - buttonRect.right + 10) + 'px';
-
-        // Toggle display
         emojiPicker.style.display = emojiPicker.style.display === 'block' ? 'none' : 'block';
       });
 
@@ -300,42 +299,33 @@
         emoji.addEventListener('click', function () {
           const emojiChar = this.getAttribute('data-emoji');
 
-          // Get current cursor position
           const cursorPos = messageTextarea.selectionStart;
           const textBefore = messageTextarea.value.substring(0, cursorPos);
           const textAfter = messageTextarea.value.substring(cursorPos);
 
-          // Insert emoji at cursor position
           messageTextarea.value = textBefore + emojiChar + textAfter;
 
-          // Set cursor position after inserted emoji
           messageTextarea.focus();
           const newCursorPos = cursorPos + emojiChar.length;
           messageTextarea.setSelectionRange(newCursorPos, newCursorPos);
 
-          // Hide emoji picker after selection
           emojiPicker.style.display = 'none';
         });
       });
 
-      // Close emoji picker when clicking outside
       document.addEventListener('click', function (e) {
         if (!emojiButton.contains(e.target) && !emojiPicker.contains(e.target)) {
           emojiPicker.style.display = 'none';
         }
       });
 
-      // Form submission (for demonstration)
       contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const message = messageTextarea.value;
 
-        // Here you would typically send the form data to a server
-        // For now, let's just show an alert
         alert(`Thank you for your message! Form data:\nEmail: ${email}\nMessage: ${message}`);
 
-        // Reset form after submission
         contactForm.reset();
       });
     });
